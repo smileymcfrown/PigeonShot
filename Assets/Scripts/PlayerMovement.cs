@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    private Rigidbody rb;
+    public static PlayerMovement Player;
+    public float FlySpeed = 5;
+    public float YawAmount = 120;
+
+    private float Yaw;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        Player = this;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //move forward
+        transform.position += transform.forward * FlySpeed * Time.deltaTime;
+
+        //inputs
+        //float horizontalInput = Input.GetAxis("Vertical");
+        //float verticalInput = Input.GetAxis("Horizontal");
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed * Time.deltaTime;
-        rb.MovePosition(rb.position + movement);
+        //yaw, pitch, roll
+        Yaw += horizontalInput * YawAmount * Time.deltaTime;
+        float pitch = Mathf.Lerp(0, 20, Mathf.Abs(verticalInput)) * Mathf.Sign(verticalInput);
+        float roll = Mathf.Lerp(0, 30, Mathf.Abs(horizontalInput)) * -Mathf.Sign(horizontalInput);
+
+        //apply the rotation
+        transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
     }
 }
