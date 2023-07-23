@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Player;
+    public GameObject Shit;
     public float FlySpeed = 5;
     public float YawAmount = 120;
 
@@ -35,5 +36,10 @@ public class PlayerMovement : MonoBehaviour
 
         //apply the rotation
         transform.localRotation = Quaternion.Euler(Vector3.up * Yaw + Vector3.right * pitch + Vector3.forward * roll);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(Shit, transform.position, Quaternion.identity);
+        }
     }
 }
