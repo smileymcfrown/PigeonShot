@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poop with textures  Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c0e933b19e6ac454b83842a35e373edd, type: 3}
+      propertyPath: m_TagString
+      value: Poop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0e933b19e6ac454b83842a35e373edd, type: 3}
 --- !u!1 &7492080939516210059 stripped
@@ -90,19 +94,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e933b19e6ac454b83842a35e373edd, type: 3}
   m_PrefabInstance: {fileID: 7726028766377121498}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &8536003391083898254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492080939516210059}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.27972683, y: 0.36165628, z: 0.17501016}
-  m_Center: {x: 0.009594517, y: 0.009276657, z: 0.08750504}
 --- !u!54 &-3054609680513501174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,3 +110,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8536003391083898254
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492080939516210059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27972683, y: 0.36165628, z: 0.17501016}
+  m_Center: {x: 0.009594517, y: 0.009276657, z: 0.08750504}
+--- !u!114 &-4941115999396952543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492080939516210059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f495559d6187da54ca140c3d15eca74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
