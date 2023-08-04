@@ -11,8 +11,11 @@ public class Feed : MonoBehaviour
     public Camera feedCamera;
     public MeshRenderer feedBlack;
 
-    public PlayerMovement playerMovement;
-    private bool onRoof;
+    [SerializeField] private GameObject _roofCanvas;
+    [SerializeField] private GameObject _flyingBird;
+    [SerializeField] private GameObject _staticBird;
+    [SerializeField] private PlayerMovement _playerMovement;
+    private bool _onRoof;
     private float oldSpeed;
     // Start is called before the first frame update
     void Start()
@@ -28,17 +31,18 @@ public class Feed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!onRoof)
+        if (!_onRoof)
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                oldSpeed = playerMovement.FlySpeed;
-                playerMovement.FlySpeed = 0;
+                oldSpeed = _playerMovement.FlySpeed;
+                _playerMovement.FlySpeed = 0;
+                _flyingBird.SetActive(false);
                 feedCamera.gameObject.SetActive(true);
                 StartCoroutine(FadeCameras());
+                _staticBird.SetActive(true);
             }
-
-            onRoof = true;
+            _onRoof = true;
         }
     }
 
@@ -48,9 +52,9 @@ public class Feed : MonoBehaviour
         float duration = 1f;
         if (playerCamera.enabled)
         {
-            while (time < (duration*2))
+            while (time < (duration))
             {
-                playerBlack.material.color = Color.Lerp(Color.clear, Color.black, time / (duration*2));
+                playerBlack.material.color = Color.Lerp(Color.clear, Color.black, time / (duration));
                 time += Time.deltaTime;
                 yield return null;
             }
@@ -65,6 +69,7 @@ public class Feed : MonoBehaviour
                 time += Time.deltaTime;
                 yield return null;
             }
+            _roofCanvas.SetActive(true);
         }
         
     }
