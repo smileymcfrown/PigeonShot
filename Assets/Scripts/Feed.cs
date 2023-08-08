@@ -17,6 +17,8 @@ public class Feed : MonoBehaviour
     [SerializeField] private PlayerMovement _playerMovement;
     private bool _onRoof;
     private float oldSpeed;
+    private bool _feedActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,25 +28,44 @@ public class Feed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_feedActive && Input.GetKeyDown(KeyCode.Space))
+        {
+            // Return the player to the original state
+            _playerMovement.FlySpeed = oldSpeed;
+            _flyingBird.SetActive(true);
+            feedCamera.gameObject.SetActive(false);
+            playerCamera.enabled = true;
+            feedCamera.enabled = false;
+            _staticBird.SetActive(false);
+            playerBlack.material.color = Color.clear;
+            feedBlack.material.color = Color.clear;
+            _roofCanvas.SetActive(false);
+            _onRoof = false;
+            _feedActive = false; // Reset the feed state
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_onRoof)
+        if (!_onRoof && !_feedActive && other.CompareTag("Player"))
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                oldSpeed = _playerMovement.FlySpeed;
-                _playerMovement.FlySpeed = 0;
-                _flyingBird.SetActive(false);
-                feedCamera.gameObject.SetActive(true);
-                StartCoroutine(FadeCameras());
-                _staticBird.SetActive(true);
-            }
-            _onRoof = true;
+            EnterFeedState();
         }
     }
+
+    private void EnterFeedState()
+    {
+        oldSpeed = _playerMovement.FlySpeed;
+        _playerMovement.FlySpeed = 0;
+        _flyingBird.SetActive(false);
+        feedCamera.gameObject.SetActive(true);
+        StartCoroutine(FadeCameras());
+        _staticBird.SetActive(true);
+
+        _onRoof = true;
+        _feedActive = true;
+    }
+
 
     IEnumerator FadeCameras()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
+    public Material ColorOutput; // Assign this in the Inspector
+
     private void OnCollisionEnter(Collision collision)
     {
         // Check collision is with object that has the tag "Prop"
@@ -14,11 +16,8 @@ public class ColorChanger : MonoBehaviour
             // Check if Renderer component is on collided object
             if (renderer != null)
             {
-                // Generate a random color
-                Color randomColor = new Color(Random.value, Random.value, Random.value);
-
-                // Assign random color to collided object's material (add more script here later)
-                renderer.material.color = randomColor;
+                // Assign the color from ColorOutput material
+                renderer.material = ColorOutput;
 
                 // Destroy object so it doesn't change the colors over and over again
                 Destroy(gameObject);
@@ -26,5 +25,3 @@ public class ColorChanger : MonoBehaviour
         }
     }
 }
-
-
